@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/WEB-INF/template.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <h:form id="form" class="align-center">
+
+            <p:panelGrid columns="2"
+                         layout="tabular"
+                         style="width: 50%"
+                         columnClasses="col-label, col-campo">
+
+                <f:facet name="header">
+                    Venda
+                </f:facet>
+                               
+                <p:outputLabel for="codigo" value="Código" />
+                <p:inputNumber id="codigo" value="#{vendaController.venda.id}" size="35" />
+    
+                <p:outputLabel for="curso" value="Curso" />
+                <p:inputText id="curso" value="#{vendaController.cursoSelecionado.nome}" size="35" />
+
+                <p:outputLabel for="valor" value="Valor" />
+                <p:inputNumber id="valor" value="#{vendaController.cursoSelecionado.valor}" size="35" />
+
+            </p:panelGrid>
+
+            <p:commandButton value="Adicionar" 
+                             action="#{vendaController.adicionar}"
+                             update=":growl tabela"/>
+
+            <p:dataTable id="tabela" value="#{vendaController.itensVenda}"
+                         var="item">
+
+                <f:facet name="header">
+                    <h:outputText value="Lista de Cursos" style="font-weight:bold;" />
+                </f:facet>
+                
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{item.venda.id}" />
+                </p:column>
+
+                <p:column headerText="Curso">
+                    <h:outputText value="#{item.curso.nome}" />
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{item.curso.valor}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:commandButton value="Pagamento"
+                             action="#{vendaController.verificarPagamento()}"
+                 update=":growl tabela"
+                 immediate="true" />
+
+        </h:form>
+    </ui:define>
+</ui:composition>

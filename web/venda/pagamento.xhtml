@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/WEB-INF/template.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <h:form id="form" class="align-center">
+
+            <p:dataTable id="tabela" value="#{vendaController.itensVenda}"
+                         var="item">
+
+                <f:facet name="header">
+                    <h:outputText value="Lista de Cursos" style="font-weight:bold;" />
+                </f:facet>
+
+                <p:column headerText="Codigo">
+                    <h:outputText value="#{item.venda.id}" />
+                </p:column>
+
+                <p:column headerText="Curso">
+                    <h:outputText value="#{item.curso.nome}" />
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{item.curso.valor}" />
+                </p:column>
+
+            </p:dataTable>
+
+            <h:outputText value="Desconto " style="font-weight:bold;" />
+            <p:selectOneMenu id="desconto" value="#{vendaController.venda.desconto}" style="width:150px;">
+                <f:selectItem itemLabel="Selecione" itemValue="" />
+                <f:selectItem itemLabel="5%" itemValue="5" />
+                <f:selectItem itemLabel="10%" itemValue="10" />
+                <f:selectItem itemLabel="15%" itemValue="15" />
+                <f:convertNumber />
+                <p:ajax event="change"
+                        listener="#{vendaController.aplicarDesconto}"
+                        update="tabela total" />
+            </p:selectOneMenu><br /><br />
+
+            <h:outputText id="total" style="font-size: 24px; font-weight: bold;" value="Total: #{vendaController.valorTotal}" /><br /><br />
+
+            <p:commandButton value="Finalizar" 
+                             action="#{vendaController.finalizar()}"
+                             update=":growl"/>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
