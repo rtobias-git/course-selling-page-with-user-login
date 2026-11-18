@@ -1,15 +1,15 @@
-# 🎓 Sistema de Venda de Cursos (JSF + PrimeFaces + JPA)
+# Sistema de Venda de Cursos (JSF + PrimeFaces + JPA)
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Jakarta EE](https://img.shields.io/badge/Jakarta%20EE-10-blue?style=for-the-badge&logo=eclipse&logoColor=white)
 ![PrimeFaces](https://img.shields.io/badge/PrimeFaces-15.0-007ACC?style=for-the-badge)
 ![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-Aplicação web em **Java (Jakarta Faces / JSF, PrimeFaces, CDI, EJB e JPA)** desenvolvida para a disciplina de **Ferramentas de Programação** no IFSP Campus Presidente Epitácio. O sistema simula o fluxo completo de venda de cursos, desde a inclusão e validação de itens até o cálculo de desconto em tempo real e a persistência da venda no banco de dados.
+Aplicação web desenvolvida em Java com Jakarta EE (JSF, PrimeFaces, CDI, EJB e JPA) para a disciplina de Ferramentas de Programação no IFSP (Campus Presidente Epitácio). O sistema simula o fluxo de venda de cursos, cobrindo validação de formulários, aplicação de descontos em tempo real com AJAX e gravação da compra no banco de dados.
 
 ---
 
-## 📸 Capturas de Tela
+## Capturas de tela
 
 | Página Inicial | Tela de Venda |
 | :---: | :---: |
@@ -29,26 +29,25 @@ Aplicação web em **Java (Jakarta Faces / JSF, PrimeFaces, CDI, EJB e JPA)** de
 
 ---
 
-## ⚙️ Funcionalidades Implementadas
+## Funcionalidades
 
-### 🧭 Menu e Notificações (`WEB-INF/template.xhtml`)
-- Barra de navegação com ícones personalizados para os itens **Home** (`/index.xhtml`) e **Venda** (`/venda/criar.xhtml`).
-- Exibição de mensagens de erro, atenção e sucesso em formato de balão por meio do componente `<p:growl>`.
+### Navegação e mensagens (template.xhtml)
+- Menu de navegação para a página inicial e tela de vendas.
+- Exibição de avisos e mensagens de validação usando o componente p:growl.
 
-### 🛒 Página de Venda (`venda/criar.xhtml`)
-- Campos obrigatórios de **Código**, **Curso** e **Valor**, com foco automático ao clicar nos respectivos rótulos (`<p:outputLabel for="..." />`).
-- Validação garantindo que **Código** e **Valor** sejam maiores que zero.
-- Adição dinâmica de cursos na tabela **Lista de Cursos**.
-- Botão **Pagamento** configurado com `immediate="true"`, permitindo o avanço apenas quando há pelo menos um curso adicionado na lista.
+### Inclusão de cursos (venda/criar.xhtml)
+- Campos para informar código, curso e valor.
+- Validação garantindo que código e valor sejam maiores que zero.
+- Adição dos cursos selecionados em uma tabela antes de avançar para o pagamento.
 
-### 💳 Página de Pagamento (`venda/pagamento.xhtml`)
-- Resumo dos cursos selecionados na etapa anterior.
-- Seleção de desconto (**5%**, **10%** ou **15%**) com recálculo automático do valor total via `<p:ajax event="change" />`.
-- Botão **Finalizar**, que persiste a venda no banco via `VendaDAO`, limpa o estado da sessão para uma nova compra e redireciona para a página inicial exibindo a mensagem com o valor total pago.
+### Pagamento e desconto (venda/pagamento.xhtml)
+- Resumo dos cursos adicionados ao pedido.
+- Opções de desconto (5%, 10% ou 15%) com recálculo do valor total via AJAX.
+- Finalização da compra, registro da venda no banco de dados via JPA e redirecionamento com confirmação do valor pago.
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do projeto
 
 ```text
 course-selling-page-with-user-login/
@@ -82,17 +81,17 @@ course-selling-page-with-user-login/
 
 ---
 
-## 🚀 Como Executar
+## Como executar
 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/rtobias-git/course-selling-page-with-user-login.git
    ```
-2. Configure o banco de dados **MySQL** e ajuste o arquivo `web/WEB-INF/glassfish-resources.xml`, se necessário.
-3. Abra o projeto no **Apache NetBeans** com o **GlassFish Server** configurado e execute o deploy da aplicação.
+2. Configure o banco de dados MySQL e ajuste o arquivo `web/WEB-INF/glassfish-resources.xml` se necessário.
+3. Abra o projeto no NetBeans e faça o deploy no GlassFish Server.
 
 ---
 
-## 👤 Autor
+## Autor
 
-Desenvolvido por **Tobias Rafael** ([@rtobias-git](https://github.com/rtobias-git)) — IFSP Campus Presidente Epitácio.
+Desenvolvido por **Tobias Rafael** ([@rtobias-git](https://github.com/rtobias-git)), estudante do IFSP Campus Presidente Epitácio.
